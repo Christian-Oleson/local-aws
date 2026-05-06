@@ -2,7 +2,7 @@
 
 ## Vision
 
-A drop-in AWS Secrets Manager replacement sharing local-s3's Docker image and port (4566), enabling developers to use Secrets Manager in local development with zero account signup.
+A drop-in AWS Secrets Manager replacement sharing local-aws's Docker image and port (4566), enabling developers to use Secrets Manager in local development with zero account signup.
 
 ## North Star Metric
 
@@ -45,7 +45,7 @@ Any application using `aws-sdk-*` Secrets Manager client works against this serv
 
 ## Technical Stack
 
-- **Language:** Rust (same binary as local-s3)
+- **Language:** Rust (same binary as local-aws)
 - **HTTP Framework:** axum (existing)
 - **Protocol:** AWS JSON 1.1 (POST /, X-Amz-Target dispatch, JSON bodies)
 - **Storage:** Local filesystem ({data-dir}/.secrets-manager/)

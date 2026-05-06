@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-Add DynamoDB as the third AWS service in local-s3, enabling developers to run applications that depend on DynamoDB without LocalStack accounts or real AWS credentials. DynamoDB is the most complex service to emulate due to its expression engine, but also the most impactful — it's the primary database for serverless AWS applications.
+Add DynamoDB as the third AWS service in local-aws, enabling developers to run applications that depend on DynamoDB without LocalStack accounts or real AWS credentials. DynamoDB is the most complex service to emulate due to its expression engine, but also the most impactful — it's the primary database for serverless AWS applications.
 
 ## Problem Statement
 

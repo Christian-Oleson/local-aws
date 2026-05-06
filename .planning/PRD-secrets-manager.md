@@ -16,7 +16,7 @@ A local Secrets Manager emulator eliminates this friction while keeping applicat
 
 ## Vision
 
-A drop-in Secrets Manager replacement running alongside local-s3, sharing the same Docker image, same port (4566), and same filesystem persistence model. Developers configure `AWS_ENDPOINT_URL=http://localhost:4566` once and both S3 and Secrets Manager work.
+A drop-in Secrets Manager replacement running alongside the S3 service in local-aws, sharing the same Docker image, same port (4566), and same filesystem persistence model. Developers configure `AWS_ENDPOINT_URL=http://localhost:4566` once and both S3 and Secrets Manager work.
 
 ## Target Users
 
@@ -276,13 +276,13 @@ var response = await client.GetSecretValueAsync(new GetSecretValueRequest { Secr
 
 ### Project Rename
 
-With multiple services, the project should be renamed from `local-s3` to `local-aws` or remain `local-s3` with Secrets Manager as an additional module. Options:
+**Status: Done.** The repository has been renamed from `local-s3` to `local-aws`. The Cargo package name and binary (`local-s3`) and the `LOCAL_S3_*` environment variables have not yet been renamed; they still use the original `local-s3` names for backwards compatibility.
 
-1. **Rename to `local-aws`** — cleaner, supports future services (SQS, SNS, DynamoDB)
+Original options considered:
+
+1. **Rename to `local-aws`** — cleaner, supports future services (SQS, SNS, DynamoDB) ← chosen
 2. **Keep `local-s3` and add `local-secrets`** — separate binaries, harder to deploy
 3. **Keep `local-s3` with built-in Secrets Manager** — simplest, single binary
-
-**Recommendation:** Option 3 for now (single binary, single port). Rename when a third service is added.
 
 ### Code Organization
 

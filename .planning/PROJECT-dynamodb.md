@@ -2,7 +2,7 @@
 
 ## Vision
 
-A Rust-native DynamoDB emulator embedded in the local-s3 binary, enabling developers to run DynamoDB-backed applications locally without JRE, LocalStack accounts, or AWS credentials.
+A Rust-native DynamoDB emulator embedded in the local-aws binary, enabling developers to run DynamoDB-backed applications locally without JRE, LocalStack accounts, or AWS credentials.
 
 ## North Star Metric
 
