@@ -1,4 +1,4 @@
-# local-s3
+# local-aws — S3 service
 
 ## Vision
 
@@ -76,8 +76,8 @@ A fast, lightweight, filesystem-backed S3-compatible server in Rust that replace
 ## Success Criteria
 
 - [ ] All P0 operations pass AWS SDK compatibility tests (JS, Python, Rust)
-- [ ] Docker image builds and runs with `docker run -p 4566:4566 -v ./data:/data local-s3`
-- [ ] Existing HealioSpace local dev setup works when swapping LocalStack S3 for local-s3
+- [ ] Docker image builds and runs with `docker run -p 4566:4566 -v ./data:/data local-aws`
+- [ ] Existing HealioSpace local dev setup works when swapping LocalStack S3 for local-aws
 - [ ] Files persist across container restarts via volume mount
 - [ ] Handles 100+ concurrent requests without errors
 

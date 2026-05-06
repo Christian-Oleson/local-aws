@@ -26,7 +26,7 @@ Estimated Complexity: High
 
 ### Dependencies
 
-- None (builds on existing local-s3 infrastructure)
+- None (builds on existing local-aws infrastructure)
 
 ---
 

@@ -486,7 +486,7 @@ impl FileSystemStorage {
         }
 
         // Sort by last_modified descending (newest first)
-        versions.sort_by(|a, b| b.last_modified.cmp(&a.last_modified));
+        versions.sort_by_key(|v| std::cmp::Reverse(v.last_modified));
         Ok(versions)
     }
 
@@ -2037,7 +2037,7 @@ impl FileSystemStorage {
             }
         }
 
-        uploads.sort_by(|a, b| a.initiated.cmp(&b.initiated));
+        uploads.sort_by_key(|u| u.initiated);
         Ok(uploads)
     }
 
@@ -2108,10 +2108,7 @@ impl FileSystemStorage {
 
     async fn cleanup_empty_parents(&self, path: &std::path::Path, stop_at: &std::path::Path) {
         let mut current = path.to_path_buf();
-        loop {
-            let Some(parent) = current.parent() else {
-                break;
-            };
+        while let Some(parent) = current.parent() {
             if parent == stop_at || !parent.starts_with(stop_at) {
                 break;
             }

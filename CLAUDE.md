@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-`local-s3` is a fast, lightweight S3-compatible server written in Rust. It replaces LocalStack's S3 and Secrets Manager for local development — no account signup required. Filesystem-backed with Docker volume persistence. Both services run on port 4566.
+`local-aws` is a fast, lightweight multi-service AWS-compatible server written in Rust. It replaces LocalStack's S3 and Secrets Manager for local development — no account signup required. Filesystem-backed with Docker volume persistence. Both services run on port 4566. (The Cargo package and installed binary are still named `local-s3` — these have not yet been renamed.)
 
 ## Commands
 
@@ -23,19 +23,19 @@ cargo clippy -- -D warnings          # Lint (treat warnings as errors)
 ### Docker
 
 ```bash
-docker build -t local-s3 .
-docker run -p 4566:4566 -v ./data:/data local-s3
+docker build -t local-aws .
+docker run -p 4566:4566 -v ./data:/data local-aws
 
 # With environment variable overrides
-docker run -p 9000:9000 -e LOCAL_S3_PORT=9000 -v ./data:/data local-s3
+docker run -p 9000:9000 -e LOCAL_S3_PORT=9000 -v ./data:/data local-aws
 ```
 
 ### Docker Compose
 
 ```yaml
 services:
-  local-s3:
-    image: ghcr.io/christian-oleson/local-s3
+  local-aws:
+    image: ghcr.io/christian-oleson/local-aws
     ports:
       - "4566:4566"
     volumes:

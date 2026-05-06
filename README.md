@@ -1,13 +1,15 @@
-# local-s3
+# local-aws
 
-A fast, lightweight S3-compatible server for local development. No account required.
+A fast, lightweight, multi-service AWS-compatible server for local development. No account required.
 
-[![CI](https://github.com/christian-oleson/local-s3/actions/workflows/ci.yml/badge.svg)](https://github.com/christian-oleson/local-s3/actions/workflows/ci.yml)
+[![CI](https://github.com/christian-oleson/local-aws/actions/workflows/ci.yml/badge.svg)](https://github.com/christian-oleson/local-aws/actions/workflows/ci.yml)
 
 ## Why?
 
-LocalStack now requires account signup. local-s3 is a zero-dependency, drop-in replacement
-for LocalStack's S3 that runs locally with no account, no signup, no telemetry.
+LocalStack now requires account signup. local-aws is a zero-dependency, drop-in replacement
+for LocalStack's S3 and Secrets Manager that runs locally with no account, no signup, no telemetry.
+Both services share a single binary, port, and filesystem — set `AWS_ENDPOINT_URL=http://localhost:4566`
+once and your existing code just works.
 
 - **Rust-native**: built on axum and tokio — sub-millisecond overhead on local requests
 - **Filesystem-backed**: buckets are directories, objects are files — easy to inspect and debug
@@ -20,15 +22,15 @@ for LocalStack's S3 that runs locally with no account, no signup, no telemetry.
 ### Docker (recommended)
 
 ```bash
-docker run -p 4566:4566 -v ./data:/data ghcr.io/christian-oleson/local-s3
+docker run -p 4566:4566 -v ./data:/data ghcr.io/christian-oleson/local-aws
 ```
 
 ### Docker Compose
 
 ```yaml
 services:
-  local-s3:
-    image: ghcr.io/christian-oleson/local-s3
+  local-aws:
+    image: ghcr.io/christian-oleson/local-aws
     ports:
       - "4566:4566"
     volumes:
@@ -41,6 +43,9 @@ services:
 cargo install --path .
 local-s3 --port 4566 --data-dir ./data
 ```
+
+> Note: the installed binary is currently named `local-s3` (the package has not been
+> renamed yet). The repository, image, and project name are `local-aws`.
 
 ## SDK Configuration
 
@@ -189,7 +194,7 @@ LOCAL_S3_PORT=9000 LOCAL_S3_DATA_DIR=/tmp/s3 local-s3
 Example using CLI flags:
 
 ```bash
-local-s3 --port 9000 --data-dir /tmp/s3
+local-s3 --port 9000 --data-dir /tmp/local-aws
 ```
 
 ## Health Check
@@ -231,7 +236,7 @@ Secrets are stored under `.secrets-manager/secrets/` with one subdirectory per s
 Use a Docker volume to persist data across restarts:
 
 ```bash
-docker run -p 4566:4566 -v /path/on/host:/data ghcr.io/christian-oleson/local-s3
+docker run -p 4566:4566 -v /path/on/host:/data ghcr.io/christian-oleson/local-aws
 ```
 
 ## Development
@@ -257,8 +262,8 @@ cargo clippy -- -D warnings          # Lint
 ### Running with Docker
 
 ```bash
-docker build -t local-s3 .
-docker run -p 4566:4566 -v ./data:/data local-s3
+docker build -t local-aws .
+docker run -p 4566:4566 -v ./data:/data local-aws
 ```
 
 ### Project Structure
