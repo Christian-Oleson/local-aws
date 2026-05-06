@@ -22,9 +22,12 @@ hex = "0.4"
 base64 = "0.22"
 
 [dev-dependencies]
-aws-config = "1"
-aws-sdk-s3 = "1"
-aws-sdk-secretsmanager = "1"
+# default-features disabled to avoid the legacy `rustls` feature path, which
+# pulls in rustls 0.21 / rustls-webpki 0.101 (RUSTSEC-2025-* DoS via malformed
+# CRL BIT STRING). The modern `default-https-client` path uses rustls 0.23.
+aws-config = { version = "1", default-features = false, features = ["default-https-client", "rt-tokio", "credentials-process", "behavior-version-latest"] }
+aws-sdk-s3 = { version = "1", default-features = false, features = ["default-https-client", "rt-tokio", "sigv4a", "http-1x", "behavior-version-latest"] }
+aws-sdk-secretsmanager = { version = "1", default-features = false, features = ["default-https-client", "rt-tokio", "behavior-version-latest"] }
 aws-credential-types = "1"
 tempfile = "3"
 tokio = { version = "1", features = ["full", "test-util"] }
